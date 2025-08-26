@@ -224,8 +224,8 @@ p {
 }
 
 .hero-image img {
-    width: 100%;
-    height: auto;
+    width:100%;
+    height:  800px;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
@@ -379,55 +379,6 @@ p {
 .benefit-card p {
     color: #666;
     line-height: 1.6;
-}
-
-/* Testimonials Section */
-.testimonials {
-    padding: 6rem 0;
-    background: white;
-}
-
-.coming-soon {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.coming-soon-content h3 {
-    color: var(--primary);
-    margin-bottom: 1rem;
-}
-
-.coming-soon-content p {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-}
-
-.preview-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.preview-card {
-    background: #f8f9fa;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-}
-
-.preview-card img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 1rem;
-}
-
-.preview-card p {
-    font-style: italic;
-    color: #888;
 }
 
 /* Contact Section */
@@ -738,6 +689,9 @@ p {
 
     .hero-image {
         order: -1;
+        object-fit: cover;
+        height: auto;
+        width: 100%;
     }
 
     .cta-button {
