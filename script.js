@@ -75,14 +75,34 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Form handling
+const APIKEY = "Hyc4sXa_KSJnc3E-iqDc7Zz5R2zahkK36V8P1jQa3h4";
+const URL = "http://127.0.0.1:8000/api/v1/send-email/";
+
 document.getElementById("contactForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const formData = new FormData(e.target);
-  const formObject = {};
-  formData.forEach((value, key) => {
-    formObject[key] = value;
-  });
+  // const formObject = {};
+  // formData.forEach((value, key) => {
+  //   formObject[key] = value;
+  // });
+  const data = Object.fromEntries(formData.entries());
+
+  if (data.website) return showMessage(`Error sending your message at the moment...`, "error");
+  const normalizedData = {
+    visitor_email: data.email,
+    subject: `EDUPIMA - I need a ${data.subjects} tutor for my child`,
+    body: {
+      child_name: data.childName,
+      parent_name: data.parentName,
+      phone: data.phone,
+      child_age_range: data.childAge,
+      current_grade: data.grade,
+      subject: data.subjects,
+      message: data.message,
+      urgency: data.urgency,
+    },
+  };
 
   // Show loading state
   const submitBtn = e.target.querySelector(".submit-btn");
@@ -92,26 +112,44 @@ document.getElementById("contactForm").addEventListener("submit", async (e) => {
 
   try {
     // Simulate form submission (replace with actual endpoint)
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const response = await fetch(`${URL}?apikey=${APIKEY}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(normalizedData),
+    });
 
-    // Show success message
-    showMessage(
-      "Thank you! We've received your information and will connect you with the perfect teacher for your child within 24 hours. Check your email for next steps!",
-      "success"
-    );
+    const result = await response.json();
+
+    if (response.ok) {
+      // Show success message
+      showMessage(
+        "Thank you! We've received your information and will connect you with the perfect teacher for your child within 24 hours. Check your email for next steps!",
+        "success"
+      );
+      console.log(result);
+    } else {
+      showMessage(
+        "Failed to send message. Please try again or contact us directly at admin@pimahealth.co",
+        "error"
+      );
+      console.log(result);
+    }
 
     // Reset form
     e.target.reset();
   } catch (error) {
     console.error("Form submission error:", error);
     showMessage(
-      "There was an error sending your message. Please try again or contact us directly at hello@EduPima.com",
+      "There was an error sending your message. Please try again or contact us directly at admin@pimahealth.co",
       "error"
     );
   } finally {
     // Reset button
     submitBtn.textContent = originalText;
     submitBtn.disabled = false;
+    return;
   }
 });
 
@@ -162,15 +200,6 @@ function validateField(e) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(value)) {
       showFieldError(field, "Please enter a valid email address");
-      return false;
-    }
-  }
-
-  // Phone validation
-  if (field.type === "tel" && value) {
-    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-    if (!phoneRegex.test(value.replace(/[\s\-\(\)]/g, ""))) {
-      showFieldError(field, "Please enter a valid phone number");
       return false;
     }
   }
@@ -237,6 +266,8 @@ document.getElementById("subjects").addEventListener("change", (e) => {
       placeholder =
         "Is your child a complete beginner or do they have some coding experience? What programming languages or projects interest them?";
       break;
+    default:
+      placeholder = "What your message?";
   }
 
   messageTextarea.placeholder = placeholder;
@@ -302,7 +333,7 @@ fab.style.cssText = `
     right: 20px;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #00bcd4, #0097a7);
+    background: linear-gradient(135deg, #0b6d37ff);, #00a74bff);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -325,3 +356,4 @@ fab.addEventListener("mouseleave", () => {
 });
 
 document.body.appendChild(fab);
+
