@@ -95,6 +95,7 @@ document.getElementById("contactForm").addEventListener("submit", async (e) => {
     body: {
       child_name: data.childName,
       parent_name: data.parentName,
+      visitor_email: data.email,
       phone: data.phone,
       child_age_range: data.childAge,
       current_grade: data.grade,
