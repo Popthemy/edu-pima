@@ -74,10 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
 const APIKEY = "R8Nmsp-pvZX5XYWxDPaqwXJOgYDWEklo_xjJDOiTYts";
 const URL = "http://pimadev.pythonanywhere.com/api/v1/send-email/";
-
-
 
 document.getElementById("contactForm").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -130,13 +129,11 @@ document.getElementById("contactForm").addEventListener("submit", async (e) => {
         "Thank you! We've received your information and will connect you with the perfect teacher for your child within 24 hours. Check your email for next steps!",
         "success"
       );
-      console.log(result)
     } else {
       showMessage(
         "Failed to send message. Please try again or contact us directly at admin@pimahealth.co",
         "error"
       );
-      console.log(result);
 
     }
 
