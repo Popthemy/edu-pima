@@ -74,9 +74,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 const APIKEY = "R8Nmsp-pvZX5XYWxDPaqwXJOgYDWEklo_xjJDOiTYts";
-const URL = "http://pimadev.pythonanywhere.com/api/v1/send-email/";
+const URL = "https://pimadev.pythonanywhere.com/api/v1/send-email/";
+
+
 
 document.getElementById("contactForm").addEventListener("submit", async (e) => {
   e.preventDefault();
