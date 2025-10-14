@@ -74,10 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-const APIKEY = "R8Nmsp-pvZX5XYWxDPaqwXJOgYDWEklo_xjJDOiTYts";
-const URL = "https://pimadev.pythonanywhere.com/api/v1/send-email/";
+// Form handling
+// const APIKEY = "R8Nmsp-pvZX5XYWxDPaqwXJOgYDWEklo_xjJDOiTYts";
+// const URL = "https://pimadev.pythonanywhere.com/api/v1/send-email/";
 
-
+const APIKEY = "f53qVR9rSSWibTd9Z1NL162wniyJsNhOled4jUxYbX8";
+const URL = "http://127.0.0.1:8000/api/v1/send-email/";
 
 document.getElementById("contactForm").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -89,7 +91,8 @@ document.getElementById("contactForm").addEventListener("submit", async (e) => {
   // });
   const data = Object.fromEntries(formData.entries());
 
-  if (data.website) return showMessage(`Error sending your message at the moment...`, "error");
+  if (data.website)
+    return showMessage(`Error sending your message at the moment...`, "error");
   const normalizedData = {
     visitor_email: data.email,
     subject: `EDUPIMA - I need a ${data.subjects} tutor for my child`,
@@ -135,7 +138,6 @@ document.getElementById("contactForm").addEventListener("submit", async (e) => {
         "Failed to send message. Please try again or contact us directly at admin@pimahealth.co",
         "error"
       );
-
     }
 
     // Reset form
@@ -358,3 +360,6 @@ fab.addEventListener("mouseleave", () => {
 
 document.body.appendChild(fab);
 
+const curDate = new Date().getFullYear();
+const curDateEl = document.getElementById("#curDate");
+curDateEl.textContent = curDate;
