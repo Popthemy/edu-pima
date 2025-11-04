@@ -725,6 +725,19 @@ p {
   margin: 0;
 }
 
+.contact-item p a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item p a:hover {
+  background: white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .contact-form-wrapper {
   background: white;
   padding: 3rem;
