@@ -46,7 +46,7 @@ h6 {
 }
 
 h1 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   letter-spacing: -0.5px;
   font-weight: 800;
   background: var(--primary-gradient);
@@ -225,6 +225,10 @@ p {
 }
 
 .hero-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -794,6 +798,15 @@ p {
   background-color: #fafafa;
 }
 
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  outline: none;
+  border-color: var(--sec);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  background-color: white;
+}
+
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
@@ -1015,6 +1028,10 @@ p {
 
   h2 {
     font-size: 2rem;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
   }
 
   .hero-content {
