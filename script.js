@@ -74,21 +74,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Form handling
-const APIKEY = "R8Nmsp-pvZX5XYWxDPaqwXJOgYDWEklo_xjJDOiTYts";
-const URL = "https://pimadev.pythonanywhere.com/api/v1/send-email/";
-
-// const APIKEY = "f53qVR9rSSWibTd9Z1NL162wniyJsNhOled4jUxYbX8";
-// const URL = "http://127.0.0.1:8000/api/v1/send-email/";
-
 document.getElementById("contactForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const formData = new FormData(e.target);
   const data = Object.fromEntries(formData.entries());
 
+  // Honeypot check
   if (data.website)
     return showMessage(`Error sending your message at the moment...`, "error");
+
   const normalizedData = {
     visitor_email: data.email,
     subject: `EDUPIMA - I need a ${data.subjects} tutor for my child`,
@@ -105,6 +100,12 @@ document.getElementById("contactForm").addEventListener("submit", async (e) => {
     },
   };
 
+  // const APIKEY = "R8Nmsp-pvZX5XYWxDPaqwXJOgYDWEklo_xjJDOiTYts";
+  // const URL = "https://pimadev.pythonanywhere.com/api/v1/send-email/";
+
+  const APIKEY = "f53qVR9rSSWibTd9Z1NL162wniyJsNhOled4jUxYbX8";
+  const URL = "http://127.0.0.1:8000/api/v1/send-email/";
+
   // Show loading state
   const submitBtn = e.target.querySelector(".submit-btn");
   const originalText = submitBtn.textContent;
@@ -112,7 +113,6 @@ document.getElementById("contactForm").addEventListener("submit", async (e) => {
   submitBtn.disabled = true;
 
   try {
-    // Simulate form submission (replace with actual endpoint)
     const response = await fetch(`${URL}?apikey=${APIKEY}`, {
       method: "POST",
       headers: {
@@ -124,20 +124,17 @@ document.getElementById("contactForm").addEventListener("submit", async (e) => {
     const result = await response.json();
 
     if (response.ok) {
-      // Show success message
       showMessage(
         "Thank you! We've received your information and will connect you with the perfect teacher for your child within 24 hours. Check your email for next steps!",
         "success"
       );
+      e.target.reset();
     } else {
       showMessage(
         "Failed to send message. Please try again or contact us directly at admin@pimahealth.co",
         "error"
       );
     }
-
-    // Reset form
-    e.target.reset();
   } catch (error) {
     console.error("Form submission error:", error);
     showMessage(
@@ -145,10 +142,8 @@ document.getElementById("contactForm").addEventListener("submit", async (e) => {
       "error"
     );
   } finally {
-    // Reset button
     submitBtn.textContent = originalText;
     submitBtn.disabled = false;
-    return;
   }
 });
 
@@ -332,14 +327,14 @@ fab.style.cssText = `
     right: 20px;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #0b6d37ff);, #00a74bff);
+    background: linear-gradient(135deg, #f5576c, #c42a3fff);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(0, 188, 212, 0.4);
+    box-shadow: 0 4px 20px #ff7c8eff;
     z-index: 1000;
     transition: all 0.3s ease;
 `;
@@ -357,5 +352,5 @@ fab.addEventListener("mouseleave", () => {
 document.body.appendChild(fab);
 
 const curDate = new Date().getFullYear();
-const curDateEl = document.getElementById("#curDate");
+const curDateEl = document.getElementById("curDate");
 curDateEl.textContent = curDate;
