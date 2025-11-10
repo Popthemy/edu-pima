@@ -72,6 +72,148 @@ document.addEventListener("DOMContentLoaded", () => {
     el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
     observer.observe(el);
   });
+
+  function loadFaqQuestion() {
+    const faqContainer = document.querySelector(".faq-container");
+    const faqQuestionList = [
+      {
+        question:
+          "What online educational platform is best for affordable learning?",
+        answer:
+          "There isn’t one 'best' platform for everyone, but EduPima stands out for offering affordable, high-quality tutoring designed for every student’s learning pace. The right platform depends on your goals, budget, and preferred learning style.",
+      },
+      {
+        question: "Are there free or low-cost tutoring options online?",
+        answer:
+          "Yes. While platforms like Upchieve and Learn to Be offer free tutoring, EduPima provides an affordable paid model that ensures quality, consistency, and personalized support for every learner.",
+      },
+      {
+        question: "What site is best for affordable online tutoring?",
+        answer:
+          "Platforms like Preply, Chegg, and Superprof are popular, but EduPima focuses on affordability and access, ensuring parents can give their children quality learning without high costs.",
+      },
+      {
+        question: "How can a student become a tutor on EduPima?",
+        answer:
+          "Becoming a tutor on EduPima is simple: Identify your strongest subjects, create your EduPima tutor profile, upload sample lessons or materials, set your affordable tutoring rates, and start tutoring while gathering reviews.",
+      },
+      {
+        question: "How does EduPima's online tutoring work?",
+        answer:
+          "Sign up and tell us about your child's needs. We match them with a qualified teacher, and lessons happen via our secure video platform. Your child gets one-on-one personalized attention, and we track progress with detailed reports.",
+      },
+      {
+        question: "What age can my child start tutoring?",
+        answer:
+          "We tutor children from Pre-K through Grade 12. Each tutor adapts their teaching style to match developmental stages, ensuring age-appropriate learning experiences that keep children engaged and motivated.",
+      },
+      {
+        question: "How much does EduPima cost?",
+        answer:
+          "Pricing is significantly lower than traditional tutoring—typically 50-70% less. We offer flexible packages starting with a free trial session so you can experience our quality before committing. Contact us for customized pricing.",
+      },
+      {
+        question: "How do I choose the right tutor for my child?",
+        answer:
+          "Our AI algorithm matches your child's learning style, goals, and subject needs with tutors who specialize in those areas. You can review tutor profiles and request changes to find the perfect fit for your child.",
+      },
+      {
+        question: "What subjects do you offer?",
+        answer:
+          "We cover all K-12 subjects: Math, Science, English, History, Foreign Languages, Arts, Coding, and Test Prep (SAT, ACT, etc.). If you have a specific need, contact us we likely have tutors available.",
+      },
+      {
+        question: "Can my child get a free trial?",
+        answer:
+          "We offer a free 30-minute trial session with your matched tutor. It's the perfect way to experience our platform, meet your tutor, and ensure it's the right fit before any commitment.",
+      },
+      {
+        question: "What makes EduPima different from traditional tutoring?",
+        answer:
+          "We combine personalized one-on-one learning with cutting-edge technology, affordable pricing, and flexible scheduling. Our tutors are vetted professionals, and our platform tracks progress transparently so you see results.",
+      },
+      {
+        question: "How quickly will I see results?",
+        answer:
+          "Many parents notice confidence improvements within 2-3 sessions. Academic improvements typically show within 4-6 weeks. Results vary by subject and child, but consistent one-on-one tutoring accelerates learning.",
+      },
+      {
+        question: "Is online tutoring effective?",
+        answer:
+          "Yes. Research shows personalized one-on-one tutoring (online or in-person) is highly effective. Our platform enhances this with interactive tools, recorded sessions for review, and progress tracking—often outperforming traditional tutoring.",
+      },
+      {
+        question: "How flexible are the learning schedules?",
+        answer:
+          "Very flexible. Schedule sessions around your family's calendar early morning, after school, weekends, or whenever works best. Our tutors are available across time zones, ensuring you always find a convenient time slot.",
+      },
+    ];
+
+    const faqContent = faqQuestionList.map(
+      (question, index) =>
+        `
+          <!-- FAQ 1: How does online tutoring work -->
+          <div class="faq-item" data-faq=${index + 1}>
+            <button
+              class="faq-question"
+              aria-expanded="false"
+              aria-controls="faq-answer-${index + 1}"
+            >
+              <span class="question-text"
+                >${question.question}</span
+              >
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div
+              id="faq-answer-${index + 1}"
+              class="faq-answer"
+              role="region"
+              aria-labelledby="faq-question-${index + 1}"
+            >
+              <p>
+                ${question.answer}
+              </p>
+            </div>
+          </div>
+        `
+    );
+    faqContainer.insertAdjacentHTML("beforeend", faqContent);
+  }
+  loadFaqQuestion();
+
+  const faqItems = document.querySelectorAll(".faq-item");
+  faqItems.forEach((item) => {
+    const question = item.querySelector(".faq-question");
+    const answer = item.querySelector(".faq-answer");
+
+    if (question && answer) {
+      question.addEventListener("click", () => {
+        const isOpen = question.getAttribute("aria-expanded") === "true";
+
+        // Close all other FAQs when opening a new one
+        faqItems.forEach((otherItem) => {
+          const otherQuestion = otherItem.querySelector(".faq-question");
+          const otherAnswer = otherItem.querySelector(".faq-answer");
+          if (otherQuestion && otherAnswer && otherItem !== item) {
+            otherQuestion.setAttribute("aria-expanded", "false");
+            otherAnswer.setAttribute("aria-expanded", "false");
+          }
+        });
+
+        // Toggle current FAQ
+        question.setAttribute("aria-expanded", !isOpen);
+        answer.setAttribute("aria-expanded", !isOpen);
+      });
+
+      // Keyboard navigation
+      question.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          question.click();
+        }
+      });
+    }
+  });
 });
 
 document.getElementById("contactForm").addEventListener("submit", async (e) => {
