@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         question: "Are there free or low-cost tutoring options online?",
         answer:
-          "Yes. While platforms like Upchieve and Learn to Be offer free tutoring, EduPima provides an affordable paid model that ensures quality, consistency, and personalized support for every learner.",
+          "Yes. EduPima provides an affordable paid model that ensures quality, consistency, and personalized support for every learner.",
       },
       {
         question: "What site is best for affordable online tutoring?",
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "Sign up and tell us about your child's needs. We match them with a qualified teacher, and lessons happen via our secure video platform. Your child gets one-on-one personalized attention, and we track progress with detailed reports.",
       },
       {
-        question: "What age can my child start tutoring?",
+        question: "What age can my child start learning?",
         answer:
           "We tutor children from Pre-K through Grade 12. Each tutor adapts their teaching style to match developmental stages, ensuring age-appropriate learning experiences that keep children engaged and motivated.",
       },
@@ -143,9 +143,9 @@ document.addEventListener("DOMContentLoaded", () => {
           "Yes. Research shows personalized one-on-one tutoring (online or in-person) is highly effective. Our platform enhances this with interactive tools, recorded sessions for review, and progress tracking—often outperforming traditional tutoring.",
       },
       {
-        question: "How flexible are the learning schedules?",
+        question: "How flexible are the learning schedules on EduPima?",
         answer:
-          "Very flexible. Schedule sessions around your family's calendar early morning, after school, weekends, or whenever works best. Our tutors are available across time zones, ensuring you always find a convenient time slot.",
+          "EduPima offers fully personalized learning schedules tailored to your family's routine. Whether early mornings, after school, or weekends, learners can study at their own pace. Our tutors adapt to each student’s availability and learning style, making education accessible across different time zones.",
       },
     ];
 
