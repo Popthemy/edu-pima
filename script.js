@@ -215,7 +215,57 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+let slideIndex = 0;
+let slideInterval = null;
 
+function showSlides(n) {
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+
+  if (n >= slides.length) slideIndex = 0;
+  if (n < 0) slideIndex = slides.length - 1;
+
+  slides.forEach((slide) => (slide.style.display = "none"));
+  dots.forEach((dot) => dot.classList.remove("active"));
+
+  slides[slideIndex].style.display = "block";
+  dots[slideIndex].classList.add("active");
+}
+
+function changeSlide(n) {
+  slideIndex += n;
+  showSlides(slideIndex);
+}
+
+function currentSlide(n) {
+  slideIndex = n;
+  showSlides(slideIndex);
+}
+
+function startAutoSlide() {
+  if (slideInterval) clearInterval(slideInterval);
+  slideInterval = setInterval(() => {
+    slideIndex++;
+    showSlides(slideIndex);
+  }, 5000);
+}
+
+function stopAutoSlide() {
+  clearInterval(slideInterval);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  showSlides(slideIndex);
+  startAutoSlide();
+
+  const slideshowWrapper = document.querySelector(".slideshow-wrapper");
+  if (slideshowWrapper) {
+    slideshowWrapper.addEventListener("mouseenter", stopAutoSlide);
+    slideshowWrapper.addEventListener("mouseleave", startAutoSlide);
+  }
+});
+
+// Contact Form Submission
 document.getElementById("contactForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 

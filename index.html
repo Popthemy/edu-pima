@@ -324,11 +324,59 @@
           </div>
         </div>
         <div class="hero-image">
-          <img
-            src="https://res.cloudinary.com/dtbf1jnph/image/upload/w_auto,h_774,c_fill,q_auto,f_auto/v1762348181/different-ethinics-group-learning_lwg7il.jpg"
-            alt="Child learning online with qualified tutor"
-            loading="lazy"
-          />
+          <div class="hero-slideshow">
+            <div class="slideshow-wrapper">
+              <div class="slide fade">
+                <img
+                  src="https://res.cloudinary.com/dtbf1jnph/image/upload/w_auto,h_774,c_fill,q_auto,f_auto/v1762348181/different-ethinics-group-learning_lwg7il.jpg"
+                  alt="Child learning online with qualified tutor"
+                  loading="lazy"
+                />
+              </div>
+              <div class="slide fade">
+                <img
+                  src="./girl-online-class.png"
+                  alt="Student engaged in online learning session"
+                  loading="lazy"
+                />
+              </div>
+              <div class="slide fade">
+                <img
+                  src="https://images.pexels.com/photos/5428833/pexels-photo-5428833.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  alt="Parent and child learning together online"
+                  loading="lazy"
+                />
+              </div>
+              <!-- Added slideshow navigation controls -->
+              <a
+                class="prev"
+                onclick="changeSlide(-1)"
+                aria-label="Previous slide"
+                >&#10094;</a
+              >
+              <a class="next" onclick="changeSlide(1)" aria-label="Next slide"
+                >&#10095;</a
+              >
+            </div>
+            <!-- Added slide indicators/dots for navigation -->
+            <div class="dots-container">
+              <span
+                class="dot"
+                onclick="currentSlide(0)"
+                aria-label="Go to slide 1"
+              ></span>
+              <span
+                class="dot"
+                onclick="currentSlide(1)"
+                aria-label="Go to slide 2"
+              ></span>
+              <span
+                class="dot"
+                onclick="currentSlide(2)"
+                aria-label="Go to slide 3"
+              ></span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="hero-wave"></div>
@@ -791,7 +839,7 @@
         </div>
         <div class="footer-bottom">
           <p>
-            &copy; <span id="#curDate"></span>
+            &copy; <span id="curDate"></span>
             EduPima. All rights reserved. | Building futures, one child at a
             time.
           </p>
