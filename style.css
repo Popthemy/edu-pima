@@ -384,7 +384,7 @@ p {
 .slideshow-wrapper {
   position: relative;
   height: 90%;
-  max-height: 770px;
+  max-height: 700px;
   background: white;
   border-radius: 20px;
   overflow: hidden;
