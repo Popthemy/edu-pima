@@ -149,10 +149,9 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     ];
 
-    const faqContent = faqQuestionList.map(
-      (question, index) =>
-        `
-          <!-- FAQ 1: How does online tutoring work -->
+    const faqContent = faqQuestionList
+      .map(
+        (question, index) => `
           <div class="faq-item" data-faq=${index + 1}>
             <button
               class="faq-question"
@@ -176,7 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
           </div>
         `
-    );
+      )
+      .join("");
     faqContainer.insertAdjacentHTML("beforeend", faqContent);
   }
   loadFaqQuestion();
