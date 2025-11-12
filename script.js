@@ -93,11 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
           "Platforms like Preply, Chegg, and Superprof are popular, but EduPima focuses on affordability and access, ensuring parents can give their children quality learning without high costs.",
       },
       {
-        question: "How can a student become a tutor on EduPima?",
-        answer:
-          "Becoming a tutor on EduPima is simple: Identify your strongest subjects, create your EduPima tutor profile, upload sample lessons or materials, set your affordable tutoring rates, and start tutoring while gathering reviews.",
-      },
-      {
         question: "How does EduPima's online tutoring work?",
         answer:
           "Sign up and tell us about your child's needs. We match them with a qualified teacher, and lessons happen via our secure video platform. Your child gets one-on-one personalized attention, and we track progress with detailed reports.",
