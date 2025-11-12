@@ -325,12 +325,20 @@
         </div>
         <div class="hero-image">
           <div class="hero-slideshow">
-            <div class="slideshow-wrapper">
+            <div class="slideshow-wrapper" id="slideshowWrapper">
+              <!-- Added loader container and image preloader markup -->
+              <div class="slideshow-loader" id="slideshowLoader">
+                <div class="loader-spinner">
+                  <div class="spinner-ring"></div>
+                  <p class="loader-text">Loading amazing content...</p>
+                </div>
+              </div>
               <div class="slide fade">
                 <img
                   src="https://res.cloudinary.com/dtbf1jnph/image/upload/w_530,h_740,c_fill,q_auto,f_auto/v1762833571/remote-tutoring_gzfxvq.jpg"
                   alt="Parent and child learning together online"
-                  loading="lazy"
+                  loading="eager"
+                  class="slideshow-img"
                 />
               </div>
 
@@ -338,7 +346,8 @@
                 <img
                   src="https://res.cloudinary.com/dtbf1jnph/image/upload/w_530,h_740,c_fill,q_auto,f_auto/v1762854611/18150_bhvqiq.jpg"
                   alt="cheerful brunette and blonde girls use modern laptop device for online learning session together"
-                  loading="lazy"
+                  loading="eager"
+                  class="slideshow-img"
                 />
               </div>
 
@@ -346,7 +355,8 @@
                 <img
                   src="https://res.cloudinary.com/dtbf1jnph/image/upload/w_530,h_740,c_fill,q_auto,f_auto/v1762348181/different-ethinics-group-learning_lwg7il.jpg"
                   alt="Child learning online with qualified tutor"
-                  loading="lazy"
+                  loading="eager"
+                  class="slideshow-img"
                 />
               </div>
               <!-- Added slideshow navigation controls -->
@@ -360,7 +370,7 @@
                 >&#10095;</a
               >
               <!-- Added slide indicators/dots for navigation -->
-              <div class="dots-container">
+              <div class="dots-container" id="dotsContainer">
                 <span
                   class="dot"
                   onclick="currentSlide(0)"
@@ -412,7 +422,7 @@
           <div class="step-card" data-step="2">
             <div class="step-icon">
               <img
-                src="https://res.cloudinary.com/dtbf1jnph/image/upload/v1762348628/study-group-african-people_xmoyob.jpg"
+                src="https://res.cloudinary.com/dtbf1jnph/image/upload/v1762944821/study-group-african-people_xmoyob.jpg"
                 alt="We match the perfect teacher"
                 loading="lazy"
               />

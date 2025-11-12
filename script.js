@@ -215,55 +215,139 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-let slideIndex = 0;
-let slideInterval = null;
 
-function showSlides(n) {
-  const slides = document.querySelectorAll(".slide");
-  const dots = document.querySelectorAll(".dot");
-
-  if (n >= slides.length) slideIndex = 0;
-  if (n < 0) slideIndex = slides.length - 1;
-
-  slides.forEach((slide) => (slide.style.display = "none"));
-  dots.forEach((dot) => dot.classList.remove("active"));
-
-  slides[slideIndex].style.display = "block";
-  dots[slideIndex].classList.add("active");
+// Function to preload images using Promise
+/**
+ *
+ * @param {object} images  {src:str, alt:str}
+ * @returns null
+ */
+function preloadImages(images) {
+  return new Promise.all(
+    images.map((obj) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(obj?.src);
+        img.onload = () =>
+          reject(new Error(`Failed to load image:${obj?.alt}`));
+        img.src = obj?.src;
+      });
+    })
+  );
 }
 
-function changeSlide(n) {
-  slideIndex += n;
-  showSlides(slideIndex);
+const slideShowImages = [
+  {
+    src: "https://res.cloudinary.com/dtbf1jnph/image/upload/w_530,h_740,c_fill,q_auto,f_auto/v1762833571/remote-tutoring_gzfxvq.jpg",
+    alt: "Parent and child learning together online",
+  },
+  {
+    src: "https://res.cloudinary.com/dtbf1jnph/image/upload/w_530,h_740,c_fill,q_auto,f_auto/v1762854611/18150_bhvqiq.jpg",
+    alt: "cheerful brunette and blonde girls use modern laptop device for online learning session together",
+  },
+  {
+    src: "https://res.cloudinary.com/dtbf1jnph/image/upload/w_530,h_740,c_fill,q_auto,f_auto/v1762348181/different-ethinics-group-learning_lwg7il.jpg",
+    alt: "Child learning online with qualified tutor",
+  },
+];
+
+// Initialize slideshow after images are loaded
+async function initializeSlideshowWithPreload() {
+  const loaderElement = document.getElementById("slideshowLoader");
+  const slideshowWrapper = document.getElementById("slideshowWrapper");
+  const dotsContainer = document.getElementById("dotsContainer");
+
+  try {
+    await preloadImages(slideShowImages);
+
+    // Hide loader and show slideshow
+    loaderElement.style.display = "none";
+    slideshowWrapper.style.display = "block";
+    dotsContainer.style.display = "flex";
+
+    // Start slideshow after images are visible
+    initializeSlideshow();
+  } catch (error) {
+    // Show slideshow anyway (fallback)
+    loaderElement.style.display = "none";
+    slideshowWrapper.style.display = "block";
+    dotsContainer.style.display = "flex";
+    initializeSlideshow();
+  }
 }
 
-function currentSlide(n) {
-  slideIndex = n;
-  showSlides(slideIndex);
-}
+// Slideshow initialization function
+function initializeSlideshow() {
+  let slideIndex = 0;
+  let slideTimer = null;
 
-function startAutoSlide() {
-  if (slideInterval) clearInterval(slideInterval);
-  slideInterval = setInterval(() => {
-    slideIndex++;
-    showSlides(slideIndex);
-  }, 5000);
-}
+  function showSlides(n) {
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
 
-function stopAutoSlide() {
-  clearInterval(slideInterval);
-}
+    if (n >= slides.length) {
+      slideIndex = 0;
+    }
+    if (n < 0) {
+      slideIndex = slides.length - 1;
+    }
 
-document.addEventListener("DOMContentLoaded", () => {
+    // Hide all slides
+    slides.forEach((slide) => {
+      slide.style.display = "none";
+    });
+
+    // Remove active class from all dots
+    dots.forEach((dot) => {
+      dot.classList.remove("active");
+    });
+
+    // Show current slide and highlight current dot
+    if (slides[slideIndex]) {
+      slides[slideIndex].style.display = "block";
+    }
+    if (dots[slideIndex]) {
+      dots[slideIndex].classList.add("active");
+    }
+  }
+
+  window.changeSlide = (n) => {
+    clearTimeout(slideTimer);
+    showSlides((slideIndex += n));
+    startAutoSlide();
+  };
+
+  window.currentSlide = (n) => {
+    clearTimeout(slideTimer);
+    showSlides((slideIndex = n));
+    startAutoSlide();
+  };
+
+  function startAutoSlide() {
+    slideTimer = setTimeout(() => {
+      slideIndex++;
+      showSlides(slideIndex);
+      startAutoSlide();
+    }, 5000);
+  }
+
   showSlides(slideIndex);
   startAutoSlide();
 
+  // Pause slideshow on hover
   const slideshowWrapper = document.querySelector(".slideshow-wrapper");
   if (slideshowWrapper) {
-    slideshowWrapper.addEventListener("mouseenter", stopAutoSlide);
-    slideshowWrapper.addEventListener("mouseleave", startAutoSlide);
+    slideshowWrapper.addEventListener("mouseenter", () => {
+      clearTimeout(slideTimer);
+    });
+
+    slideshowWrapper.addEventListener("mouseleave", () => {
+      startAutoSlide();
+    });
   }
-});
+}
+
+initializeSlideshowWithPreload();
 
 // Contact Form Submission
 document.getElementById("contactForm").addEventListener("submit", async (e) => {
