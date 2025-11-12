@@ -376,8 +376,8 @@ p {
 .hero-slideshow {
   margin: auto;
   position: relative;
-  height: 90%;
-  height: 770px;
+  height: 300px;
+  max-height: 770px;
   animation: fadeInRight 1s ease 0.8s both;
 }
 
@@ -441,8 +441,9 @@ p {
 
 .slideshow-wrapper {
   position: relative;
-  height: 90%;
-  max-height: 700px;
+
+  height: 300px;
+  max-height: 770px;
   background: white;
   border-radius: 20px;
   overflow: hidden;
